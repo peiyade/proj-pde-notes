@@ -1,6 +1,6 @@
 # PDE Reading Notes Workspace
 
-This repository hosts a modular LaTeX setup for collecting PDE (partial differential equations) reading notes. Each note compiles on its own while also slotting into a master `ctexbook` volume for aggregated exports.
+This repository hosts a modular LaTeX setup for collecting PDE (partial differential equations) reading notes. Each note compiles independently while also contributing to a master `ctexbook` volume.
 
 ## Layout
 
@@ -22,11 +22,11 @@ This repository hosts a modular LaTeX setup for collecting PDE (partial differen
         └── images/
 ```
 
-Add more notes by copying one of the existing directories and updating names accordingly. Keep assets (figures, tables, custom macros) inside the note folder to avoid path collisions.
+Add new notes by copying one of the directories, renaming the files, and updating the chapter metadata. Keep assets (figures, tables, custom macros) inside each note folder so paths remain local and conflict free.
 
 ## Building with Tectonic
 
-Tectonic ensures repeatable builds with a locked bundle URL. Install it locally (macOS example) according to the [official docs](https://github.com/tectonic-typesetting/tectonic):
+Tectonic provides reproducible builds with locked TeX bundles. Install it locally—on macOS, for example:
 
 ```bash
 brew install tectonic
@@ -47,18 +47,49 @@ Then compile:
   tectonic
   ```
 
-  The per-note `Tectonic.toml` targets a stable 2023 bundle and enables Synctex for editor sync.
-
-To upgrade bundles run `tectonic -X new` in the note folder and replace the generated URL in `Tectonic.toml`.
+Each note’s `Tectonic.toml` locks the 2023 bundle and enables Synctex for editor integration. To upgrade bundles, run `tectonic -X new` inside the note directory and replace the generated URL.
 
 ## Citation Workflow
 
-Each note manages its own `.bib` file and loads it via `\addbibresource{}` with `subfix` so the relative path survives both local and aggregated compilation. Bibliographies appear at the end of each chapter courtesy of `biblatex` with `refsection=chapter`.
-
-Remember to rerun `tectonic` whenever bibliography entries change—Tectonic will automatically invoke bibtex if needed.
+- Every note owns a `.bib` file that is loaded with `\addbibresource` using `\subfix` so relative paths survive subfile compilation.
+- `biblatex` is configured with `refsection=chapter`, letting each chapter print its bibliography via `\printbibliography`.
+- Rerun `tectonic` after editing citations—Tectonic automatically triggers BibTeX when needed.
 
 ## Suggestions
 
 - Configure editor tooling (VS Code LaTeX Workshop or Neovim plugins) to run `tectonic` on save.
 - Add CI later (e.g., GitHub Actions) to rebuild `main.tex` and spot missing references or figures.
 - Extend `preamble.tex` cautiously to keep per-note builds snappy; consider optional packages guarded by `\IfFileExists`.
+
+## VS Code Workflow
+
+1. Install the [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) extension.
+2. Create `.vscode/settings.json` containing:
+
+   ```json
+   {
+     "latex-workshop.latex.tools": [
+       {
+         "name": "tectonic",
+         "command": "tectonic",
+         "args": [
+           "--synctex",
+           "%DOC%"
+         ]
+       }
+     ],
+     "latex-workshop.latex.recipes": [
+       {
+         "name": "tectonic",
+         "tools": ["tectonic"]
+       }
+     ],
+     "latex-workshop.latex.autoBuild.run": "onFileChange",
+     "latex-workshop.view.pdf.viewer": "tab",
+     "latex-workshop.synctex.afterBuild.enabled": true,
+     "latex-workshop.latex.rootFile.useSubFile": true
+   }
+   ```
+
+3. Open `main.tex` for the full book or a note file for focused work. Run *LaTeX Workshop: Build with recipe* and choose `tectonic`. The recipe respects the active file, so subfiles compile locally while `main.tex` yields the aggregated PDF.
+4. When working inside a specific note folder, you can also invoke `tectonic` from the VS Code terminal. The pinned bundle in `Tectonic.toml` keeps builds deterministic; regenerate the bundle URL with `tectonic -X new` when you want newer TeX assets.
