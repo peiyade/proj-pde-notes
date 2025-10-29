@@ -18,3 +18,9 @@
 
 # Local resource caches per note
 **/resources/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
