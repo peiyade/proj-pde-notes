@@ -1,0 +1,9 @@
+[doc]
+name = "note1"
+bundle = "https://data1.fullyjustified.net/tlextras-2023.3r0/bundle.tar"
+
+[[output]]
+name = "note1"
+type = "pdf"
+inputs = "note1.tex"
+synctex = true

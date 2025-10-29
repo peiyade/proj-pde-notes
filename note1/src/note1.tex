@@ -1,0 +1,32 @@
+\documentclass[../../main.tex]{subfiles}
+\addbibresource{\subfix{../note1.bib}}
+
+\begin{document}
+
+\chapter{热方程的能量估计}
+
+\section{问题设置}
+考虑在有界区域 $\Omega \subset \mathbb{R}^n$ 上的热方程
+\begin{equation}
+  \label{eq:heat}
+  \partial_t u - \Delta u = 0 \quad \text{in } \Omega_T := \Omega \times (0,T].
+\end{equation}
+经典能量方法基于对 $\|u(\cdot,t)\|_{L^2(\Omega)}$ 的演化进行积分估计。
+
+\section{基本能量不等式}
+\begin{theorem}[能量衰减]
+  若 $u$ 是~\cref{eq:heat} 的平滑解，则
+  \[
+    \frac{\mathrm{d}}{\mathrm{d}t} \int_{\Omega} |u|^2 \,\mathrm{d}x + 2 \int_{\Omega} |\nabla u|^2 \,\mathrm{d}x = 0.
+  \]
+\end{theorem}
+\begin{proof}[证明思路]
+  将~\cref{eq:heat} 与 $u$ 相乘并积分，对 Laplace 项做分部积分即可得到结论。该推导说明能量沿时间单调递减。
+\end{proof}
+
+\section{进一步阅读}
+更完整的背景与推广可参考~\cite{evans2010} 的第 2 章。
+
+\printbibliography[heading=subbibliography]
+
+\end{document}

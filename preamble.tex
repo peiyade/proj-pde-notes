@@ -1,0 +1,38 @@
+% Shared preamble for the PDE reading notes collection.
+\usepackage{subfiles}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\usepackage{csquotes}
+\usepackage[backend=bibtex,style=authoryear,sorting=nyt,refsection=chapter]{biblatex}
+
+\graphicspath{{\subfix{images/}}}
+
+\setlist[itemize]{label=--,topsep=3pt,parsep=2pt}
+\setlist[enumerate]{label=\arabic*.,topsep=3pt,parsep=2pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=teal,
+  citecolor=teal,
+  urlcolor=teal
+}
+
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{定义}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{注记}
+
+\AtBeginEnvironment{proof}{\renewcommand{\qedsymbol}{$\square$}}

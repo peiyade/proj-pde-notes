@@ -1,0 +1,31 @@
+\documentclass[../../main.tex]{subfiles}
+\addbibresource{\subfix{../note2.bib}}
+
+\begin{document}
+
+\chapter{Sobolev 空间速查}
+
+\section{基本定义}
+设 $1 \leq p \leq \infty$，Sobolev 空间
+\[
+  W^{k,p}(\Omega) = \left\{ u \in L^p(\Omega) \mid D^\alpha u \in L^p(\Omega),\ |\alpha| \leq k \right\}
+\]
+配以半范数
+$|u|_{W^{k,p}(\Omega)} = \left( \sum_{|\alpha| = k} \|D^\alpha u\|_{L^p(\Omega)}^p \right)^{1/p}$。
+
+\section{紧嵌入}
+\begin{theorem}[Rellich--Kondrachov]
+  令 $\Omega \subset \mathbb{R}^n$ 为有界 Lipschitz 区域，$1 \leq p < p^\ast < \infty$。若
+  $k p < n$ 且 $p^\ast = \frac{np}{n - kp}$，则嵌入
+  \[
+    W^{k,p}(\Omega) \hookrightarrow L^{q}(\Omega)
+  \]
+  对所有 $1 \leq q < p^\ast$ 紧致。
+\end{theorem}
+
+\section{参考资料}
+经典教材~\cite{gilbarg2001} 第 7 章给出了完整证明以及边界正则性的细节。
+
+\printbibliography[heading=subbibliography]
+
+\end{document}
