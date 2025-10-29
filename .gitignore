@@ -1,0 +1,20 @@
+# Tectonic / TeX build artifacts
+*.aux
+*.bcf
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Generated PDFs except the aggregated volume
+*.pdf
+!main.pdf
+
+# Local resource caches per note
+**/resources/
